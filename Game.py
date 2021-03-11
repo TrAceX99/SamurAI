@@ -49,6 +49,7 @@ class Game(easyAI.TwoPlayersGame):
     def possible_moves(self):
         currentPlayerInfo = None
         opponentInfo = None
+        print(self.players)
         if self.player == self.players[0]:
             currentPlayerInfo = self.gameInfo['player1']
             opponentInfo = self.gameInfo["player2"]
