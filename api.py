@@ -42,3 +42,11 @@ class Api:
     def actionStealKoalas(self):
         r = self._send("stealKoalas?" + self.defaultargsString)
         return r
+
+    def doAction(self, move):
+        if move[0] == 0:
+            return self.actionMove(move[1], move[2])
+        elif move[0] == 1:
+            return self.actionSkipATurn()
+        elif move[0] == 2:
+            return self.actionStealKoalas()
