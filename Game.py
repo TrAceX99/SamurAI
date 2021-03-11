@@ -23,7 +23,8 @@ class Game(easyAI.TwoPlayersGame):
 
         self.stack.push(move)
         if move[0] == 0:
-            
+            for i in range(move[2]):
+                newPos = self._calcTile()
             pass
         return
 
@@ -52,6 +53,7 @@ class Game(easyAI.TwoPlayersGame):
         game.gameInfo = gameInfo
         return game
     
-    
+    def _calcTile(self, x, y, dir):
+        pass
 
     #def unmake_move(self, move): how to unmake a move (speeds up the AI)
