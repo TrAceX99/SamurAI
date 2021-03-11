@@ -27,9 +27,9 @@ def main():
         moves = game.possible_moves()
         # print(game.get_move(), "AAAAAAAAAAAAAAAAAAAA")
         print(moves)
-        time.sleep(1)
         if len(moves) == 0:
             game.gameInfo = api.doAction((0, 's', 1))
+            print(game.gameInfo['player1'])
         else:
             rand = randrange(len(moves))
             game.gameInfo = api.doAction(moves[rand])

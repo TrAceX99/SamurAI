@@ -39,9 +39,9 @@ class Game(easyAI.TwoPlayersGame):
         else:
             return None, None
 
-        if x > 8 or x < 0:
+        if x > 26 or x < 0:
             return None, None
-        if y > 26 or y < 0:
+        if y > 8 or y < 0:
             return None, None
         return x, y
         
@@ -68,19 +68,19 @@ class Game(easyAI.TwoPlayersGame):
         y = playery
         i = 1
         while i <= playerEnergy:
-            x, y = self._calcTile(x, y, 's')
+            x, y = self._calcTile(x, y, 'w')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 's', i))
+            possibleMoves.append((0, 'w', i))
             i += 1
         x = playerx
         y = playery
         i = 1
         while i <= playerEnergy:
-            x, y = self._calcTile(x, y, 'w')
+            x, y = self._calcTile(x, y, 's')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 'w', i))
+            possibleMoves.append((0, 's', i))
             i += 1
         x = playerx
         y = playery
