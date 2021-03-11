@@ -228,5 +228,5 @@ class Game(easyAI.TwoPlayersGame):
         pass
 
 
-    def getMoveValue(currentPlayerInfo, itemType):
+    def getMoveValue(self, currentPlayerInfo, itemType):
         return 100
