@@ -18,6 +18,12 @@ def main():
         gameid = int(sys.argv[1])
         api.startGame(gameid)
 
+    print(api.gameid)
+
+    while(1):
+        print(api.actionMove('s', 1)["player1"])
+
+
     game = Game(1)
     
 

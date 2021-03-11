@@ -29,3 +29,15 @@ class Api:
     def actionSkipATurn(self):
         r = self._send("skipATurn?" + self.defaultargsString)
         return r
+
+    def actionMove(self, dir, dist):
+        r = self._send("move?" + self.defaultargsString + "&direction=" + dir + "&distance=" + str(dist))
+        return r
+
+    def actionfreeASpot(self, x, y):
+        r = self._send("freeASpot?" + self.defaultargsString + "&&x=" + str(x) + "&&y=" + str(y))
+        return r
+    
+    def actionStealKoalas(self):
+        r = self._send("stealKoalas?" + self.defaultargsString)
+        return r
