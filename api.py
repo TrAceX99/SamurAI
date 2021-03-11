@@ -2,7 +2,7 @@ import requests
 import json
 
 class Api:
-    httpString = "http://147.91.162.72:8080/"
+    httpString = "https://aibg2021.herokuapp.com/"
     gameid = 0
     playerid = 713016
     defaultargsString = ""
@@ -25,6 +25,7 @@ class Api:
             self.gameid = gameId
 
         self.defaultargsString += "playerId=" + str(self.playerid) + "&gameId=" + str(self.gameid)
+        return gamedata
 
     def actionSkipATurn(self):
         r = self._send("skipATurn?" + self.defaultargsString)

@@ -12,19 +12,18 @@ def main():
 
     api = Api()
 
-    if sys.argv[1] == "-t":
-        api.startGame()
-    else:
-        gameid = int(sys.argv[1])
-        api.startGame(gameid)
+    # if sys.argv[1] == "-t":
+    #     api.startGame()
+    # else:
+    #     gameid = int(sys.argv[1])
+    #     api.startGame(gameid)
 
     print(api.gameid)
+    game = Game.startGame(api.startGame())
 
-    while(1):
-        print(api.actionMove('s', 1)["player1"])
+    gameInfo = api.actionMove('s', 1)
 
-
-    game = Game(1)
+    print(game.possible_moves())
     
 
     
