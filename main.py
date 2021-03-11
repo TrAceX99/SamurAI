@@ -25,6 +25,7 @@ def main():
 
     while True:
         moves = game.possible_moves()
+        print(game.get_move(), "AAAAAAAAAAAAAAAAAAAA")
         print(moves)
         time.sleep(1)
         if len(moves) == 0:
