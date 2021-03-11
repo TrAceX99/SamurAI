@@ -49,7 +49,7 @@ class Game(easyAI.TwoPlayersGame):
     def possible_moves(self):
         currentPlayerInfo = None
         opponentInfo = None
-        print(self.players)
+        print(self.players, self.nplayer)
         if self.player == self.players[0]:
             currentPlayerInfo = self.gameInfo['player1']
             opponentInfo = self.gameInfo["player2"]
@@ -198,7 +198,7 @@ class Game(easyAI.TwoPlayersGame):
         if humanPlaysFirst:
             game = Game([easyAI.Human_Player(), easyAI.AI_Player(easyAI.AI.Negamax(depth))])
         else:
-            game = Game([easyAI.AI_Player(easyAI.AI.Negamax(depth), easyAI.Human_Player())])
+            game = Game([easyAI.AI_Player(easyAI.AI.Negamax(depth)), easyAI.Human_Player()])
         game.gameInfo = gameInfo
         return game
     
