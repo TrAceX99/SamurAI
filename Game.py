@@ -170,6 +170,9 @@ class Game(easyAI.TwoPlayersGame):
                 mapInfo[x][y]["tileContent"]['itemType'] = "EMPTY"
                 mapInfo[x][y]["tileContent"]["numOfItems"] = 0
             mapInfo[x][y]['ownedByTeam'] = currentPlayerInfo['teamName']
+        elif move[0] == 3:
+            value = self.getMoveValue(currentPlayerInfo, "TELEPORT")
+            currentPlayerInfo['score'] += value
         return
 
     def is_over(self):
