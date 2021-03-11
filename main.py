@@ -1,6 +1,8 @@
 import sys
 import requests
 import json
+from api import Api
+from Game import Game
 
 
 def main():
@@ -8,15 +10,16 @@ def main():
         print("Too few args")
         return
 
+    api = Api()
 
-    if sys.argv[1] == "-d":
-        r = requests.get(httpString + "makeGame?playerId=" + str(playerid))
-        gamedata = json.loads(r.text)
-        gameid = gamedata["gameId"]
+    if sys.argv[1] == "-t":
+        api.startGame()
     else:
         gameid = int(sys.argv[1])
+        api.startGame(gameid)
 
-    print(gameid)
+    game = Game(1)
+    
 
     
 
