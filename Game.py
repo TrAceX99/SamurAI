@@ -7,6 +7,9 @@ class Game(easyAI.TwoPlayersGame):
         self.nplayer = 1 # koji igrac igra, 1 ili 2
         self.gameInfo = None
         self.stack = Stack()
+
+    def _calcTile(self, x, y, dir):
+        pass
         
 
     def possible_moves(self):
@@ -16,8 +19,8 @@ class Game(easyAI.TwoPlayersGame):
         else:
             currentPlayerInfo = self.gameInfo['player2']
         mapInfo = self.gameInfo['map']['tiles']
-        
-        pass
+
+        possibleMoves = []
 
     def make_move(self, move):
 
