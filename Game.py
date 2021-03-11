@@ -71,7 +71,7 @@ class Game(easyAI.TwoPlayersGame):
             x, y = self._calcTile(x, y, 's')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 's', i))
+            possibleMoves.append([0, 's', i])
             i += 1
         x = playerx
         y = playery
@@ -80,7 +80,7 @@ class Game(easyAI.TwoPlayersGame):
             x, y = self._calcTile(x, y, 'w')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 'w', i))
+            possibleMoves.append([0, 'w', i])
             i += 1
         x = playerx
         y = playery
@@ -89,7 +89,7 @@ class Game(easyAI.TwoPlayersGame):
             x, y = self._calcTile(x, y, 'd')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 'd', i))
+            possibleMoves.append([0, 'd', i])
             i += 1
         x = playerx
         y = playery
@@ -98,7 +98,7 @@ class Game(easyAI.TwoPlayersGame):
             x, y = self._calcTile(x, y, 'e')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 'e', i))
+            possibleMoves.append([0, 'e', i])
             i += 1
         x = playerx
         y = playery
@@ -107,7 +107,7 @@ class Game(easyAI.TwoPlayersGame):
             x, y = self._calcTile(x, y, 'q')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 'q', i))
+            possibleMoves.append([0, 'q', i])
             i += 1
         x = playerx
         y = playery
@@ -116,12 +116,12 @@ class Game(easyAI.TwoPlayersGame):
             x, y = self._calcTile(x, y, 'a')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 'a', i))
+            possibleMoves.append([0, 'a', i])
             i += 1
 
         #SkipATurn move
         if currentPlayerInfo["numOfSkipATurnUsed"] < 5:
-            possibleMoves.append((1, None, None))
+            possibleMoves.append([1, None, None])
 
         #StealKoalas move
         opponentx = opponentInfo["x"]
@@ -129,22 +129,22 @@ class Game(easyAI.TwoPlayersGame):
 
         x, y = self._calcTile(playerx, playery, 'a')
         if x == opponentx and y == opponenty:
-            possibleMoves.append((2, None, None))
+            possibleMoves.append([2, None, None])
         x, y = self._calcTile(playerx, playery, 's')
         if x == opponentx and y == opponenty:
-            possibleMoves.append((2, None, None))
+            possibleMoves.append([2, None, None])
         x, y = self._calcTile(playerx, playery, 'd')
         if x == opponentx and y == opponenty:
-            possibleMoves.append((2, None, None))
+            possibleMoves.append([2, None, None])
         x, y = self._calcTile(playerx, playery, 'e')
         if x == opponentx and y == opponenty:
-            possibleMoves.append((2, None, None))
+            possibleMoves.append([2, None, None])
         x, y = self._calcTile(playerx, playery, 'w')
         if x == opponentx and y == opponenty:
-            possibleMoves.append((2, None, None))
+            possibleMoves.append([2, None, None])
         x, y = self._calcTile(playerx, playery, 'q')
         if x == opponentx and y == opponenty:
-            possibleMoves.append((2, None, None))
+            possibleMoves.append([2, None, None])
 
         return possibleMoves
 
@@ -158,7 +158,7 @@ class Game(easyAI.TwoPlayersGame):
             currentPlayerInfo = self.gameInfo['player2']
         mapInfo = self.gameInfo['map']['tiles']
 
-        move.info = []
+        move.append([])
         if move[0] == 0:
             for i in range(move[2]):
                 x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], move[1])
@@ -166,7 +166,7 @@ class Game(easyAI.TwoPlayersGame):
                 currentPlayerInfo['y'] = y
                 value = self.getMoveValue(currentPlayerInfo, mapInfo[x][y]["tileContent"]['itemType'])
                 currentPlayerInfo['score'] += value
-                move.info(mapInfo[x][y]["tileContent"]['itemType'])
+                move[3].append(mapInfo[x][y]["tileContent"]['itemType'])
                 mapInfo[x][y]["tileContent"]['itemType'] = "EMPTY"
                 mapInfo[x][y]["tileContent"]["numOfItems"] = 0
             mapInfo[x][y]['ownedByTeam'] = currentPlayerInfo['teamName']
@@ -174,7 +174,7 @@ class Game(easyAI.TwoPlayersGame):
 
     def is_over(self):
         
-        pass
+        return False
 
     def scoring(self):
         currentPlayerInfo = None
@@ -214,7 +214,7 @@ class Game(easyAI.TwoPlayersGame):
             currentPlayerInfo = self.gameInfo['player2']
 
         for i in range(move[2]):
-            itemType = move.info.pop()
+            itemType = move[3].pop()
 
             currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType)
             mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
