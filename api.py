@@ -27,4 +27,5 @@ class Api:
         self.defaultargsString += "playerId=" + str(self.playerid) + "&gameId=" + str(self.gameid)
 
     def actionSkipATurn(self):
-        r = requests.get("skipATurn?" + self.defaultargsString)
+        r = self._send("skipATurn?" + self.defaultargsString)
+        return r
