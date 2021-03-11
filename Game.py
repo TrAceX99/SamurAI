@@ -51,5 +51,7 @@ class Game(easyAI.TwoPlayersGame):
             game = Game([easyAI.AI_Player(easyAI.AI.Negamax(depth), easyAI.Human_Player())])
         game.gameInfo = gameInfo
         return game
+    
+    
 
     #def unmake_move(self, move): how to unmake a move (speeds up the AI)
