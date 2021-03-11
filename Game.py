@@ -146,6 +146,10 @@ class Game(easyAI.TwoPlayersGame):
         if x == opponentx and y == opponenty:
             possibleMoves.append([2, None, None])
 
+        # TP
+        if len(possibleMoves) == 0:
+            possibleMoves.append([3, None, None])
+
         return possibleMoves
 
     def make_move(self, move):
