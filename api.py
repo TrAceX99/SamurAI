@@ -50,3 +50,6 @@ class Api:
             return self.actionSkipATurn()
         elif move[0] == 2:
             return self.actionStealKoalas()
+        # Moze biti opasno TODO
+        elif move[0] == 3:
+            return self.actionMove('s', 1)

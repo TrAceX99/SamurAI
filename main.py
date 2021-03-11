@@ -25,13 +25,11 @@ def main():
 
     while True:
         moves = game.possible_moves()
-        best_move = game.get_move()
-        if len(moves) == 0:
-            game.gameInfo = api.doAction((0, 's', 1))
-            print(game.gameInfo['player1'])
-        else:
-            rand = randrange(len(moves))
-            game.gameInfo = api.doAction(best_move)
+        move = game.get_move()
+        print(move)
+        print(moves)
+        # rand = randrange(len(moves))
+        game.gameInfo = api.doAction(move)
 
 
     
