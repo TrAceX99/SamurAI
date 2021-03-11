@@ -21,4 +21,11 @@ class Game(easyAI.TwoPlayersGame):
     def quickSetup():
         return Game([easyAI.Human_Player(), easyAI.AI_Player(easyAI.AI.Negamax(5))])
 
+    @staticmethod
+    def startGame(humanPlaysFirst=1, depth=5):
+        if humanPlaysFirst == 1:
+            return Game([easyAI.Human_Player(), easyAI.AI_Player(easyAI.AI.Negamax(depth))])
+        else:
+            return Game([easyAI.AI_Player(easyAI.AI.Negamax(depth), easyAI.Human_Player())])
+
     #def unmake_move(self, move): how to unmake a move (speeds up the AI)
