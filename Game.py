@@ -49,7 +49,6 @@ class Game(easyAI.TwoPlayersGame):
     def possible_moves(self):
         currentPlayerInfo = None
         opponentInfo = None
-        print(self.players, self.nplayer)
         if self.player == self.players[0]:
             currentPlayerInfo = self.gameInfo['player1']
             opponentInfo = self.gameInfo["player2"]
@@ -205,26 +204,27 @@ class Game(easyAI.TwoPlayersGame):
 
     def unmake_move(self, move):
 
-        direction = self.FINITE_STATE_MACHINE[move[1]]
-        mapInfo = self.gameInfo['map']['tiles']
+        if move[0] == 0:
+            direction = self.FINITE_STATE_MACHINE[move[1]]
+            mapInfo = self.gameInfo['map']['tiles']
 
-        currentPlayerInfo = None
-        if self.player == self.players[0]:
-            currentPlayerInfo = self.gameInfo['player1']
-        else:
-            currentPlayerInfo = self.gameInfo['player2']
+            currentPlayerInfo = None
+            if self.player == self.players[0]:
+                currentPlayerInfo = self.gameInfo['player1']
+            else:
+                currentPlayerInfo = self.gameInfo['player2']
 
-        for i in range(move[2]):
-            itemType = move[3].pop()
+            for i in range(move[2]):
+                itemType = move[3].pop()
 
-            currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType)
-            mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
-            mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
-            #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
-        
-            x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], direction)
-            currentPlayerInfo['x'] = x
-            currentPlayerInfo['y'] = y
+                currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType)
+                mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
+                mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
+                #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
+            
+                x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], direction)
+                currentPlayerInfo['x'] = x
+                currentPlayerInfo['y'] = y
 
         pass
 
