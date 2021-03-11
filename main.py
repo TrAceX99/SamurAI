@@ -21,8 +21,6 @@ def main():
     game = Game(1)
     
 
-    print(gameid)
-
     
 
 if __name__ == "__main__":
