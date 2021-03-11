@@ -200,8 +200,6 @@ class Game(easyAI.TwoPlayersGame):
         game.gameInfo = gameInfo
         return game
     
-    def _calcTile(self, x, y, dir):
-        pass
 
     def unmake_move(self, move):
 
