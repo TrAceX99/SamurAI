@@ -24,6 +24,7 @@ def main():
 
     while True:
         moves = game.possible_moves()
+        print(game.get_move(), "AAAAAAAAAAAAAAAAAAAA")
         print(moves)
         rand = randrange(len(moves))
         game.gameInfo = api.doAction(moves[rand])

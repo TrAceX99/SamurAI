@@ -173,6 +173,7 @@ class Game(easyAI.TwoPlayersGame):
         return
 
     def is_over(self):
+        
         pass
 
     def scoring(self):
@@ -191,9 +192,9 @@ class Game(easyAI.TwoPlayersGame):
         return Game([easyAI.Human_Player(), easyAI.AI_Player(easyAI.AI.Negamax(5))])
 
     @staticmethod
-    def startGame(gameInfo=None, humanPlaysFirst=1, depth=5):
+    def startGame(gameInfo=None, humanPlaysFirst=False, depth=5):
         game = None
-        if humanPlaysFirst == 1:
+        if humanPlaysFirst:
             game = Game([easyAI.Human_Player(), easyAI.AI_Player(easyAI.AI.Negamax(depth))])
         else:
             game = Game([easyAI.AI_Player(easyAI.AI.Negamax(depth), easyAI.Human_Player())])
@@ -212,17 +213,17 @@ class Game(easyAI.TwoPlayersGame):
         else:
             currentPlayerInfo = self.gameInfo['player2']
 
+        for i in range(move[2]):
+            itemType = move.info.pop()
 
-        itemType = move.info.pop()
-
-        currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType)
-        mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
-        mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = move.info.pop()
-        #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
+            currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType)
+            mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
+            mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
+            #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
         
-        x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], direction)
-        currentPlayerInfo['x'] = x
-        currentPlayerInfo['y'] = y
+            x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], direction)
+            currentPlayerInfo['x'] = x
+            currentPlayerInfo['y'] = y
 
         pass
 
