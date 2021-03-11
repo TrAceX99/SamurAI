@@ -25,7 +25,7 @@ def main():
 
     while True:
         moves = game.possible_moves()
-        # print(game.get_move(), "AAAAAAAAAAAAAAAAAAAA")
+        print(game.get_move(), "AAAAAAAAAAAAAAAAAAAA")
         print(moves)
         if len(moves) == 0:
             game.gameInfo = api.doAction((0, 's', 1))
