@@ -1,12 +1,12 @@
 import easyAI
-
-
+from Stack import Stack
 
 class Game(easyAI.TwoPlayersGame):
     def __init__(self, players) -> None:
         self.players = players 
         self.nplayer = 1 # koji igrac igra, 1 ili 2
         self.gameInfo = None
+        self.stack = Stack()
         
 
     def possible_moves(self):
@@ -16,14 +16,27 @@ class Game(easyAI.TwoPlayersGame):
         else:
             currentPlayerInfo = self.gameInfo['player2']
         mapInfo = self.gameInfo['map']['tiles']
-         
+        
         pass
 
     def make_move(self, move):
-        pass
+
+        self.stack.push(move)
+        if move[0] == 0:
+            
+            pass
+        return
 
     def is_over(self):
         pass
+
+    def scoring(self):
+        currentPlayerInfo = None
+        if self.player == self.players[0]:
+            currentPlayerInfo = self.gameInfo['player1']
+        else:
+            currentPlayerInfo = self.gameInfo['player2']
+        return currentPlayerInfo['score']
 
     @staticmethod
     def quickSetup():
