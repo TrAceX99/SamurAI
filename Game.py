@@ -72,7 +72,7 @@ class Game(easyAI.TwoPlayersGame):
             x, y = self._calcTile(x, y, 'w')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 'w', i))
+            possibleMoves.append([0, 'w', i])
             i += 1
         x = playerx
         y = playery
@@ -81,7 +81,7 @@ class Game(easyAI.TwoPlayersGame):
             x, y = self._calcTile(x, y, 's')
             if x == None or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE":
                 break
-            possibleMoves.append((0, 's', i))
+            possibleMoves.append([0, 's', i])
             i += 1
         x = playerx
         y = playery
