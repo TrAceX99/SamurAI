@@ -1,6 +1,7 @@
 import sys
 import requests
 import json
+from random import randrange
 from api import Api
 from Game import Game
 
@@ -21,9 +22,14 @@ def main():
     print(api.gameid)
     game = Game.startGame(api.startGame())
 
-    gameInfo = api.actionMove('s', 1)
+    while True:
+        moves = game.possible_moves()
+        print(moves)
+        rand = randrange(len(moves))
+        game.gameInfo = api.doAction(moves[rand])
 
-    print(game.possible_moves())
+
+    
     
 
     
