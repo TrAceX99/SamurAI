@@ -46,8 +46,48 @@ class Game(easyAI.TwoPlayersGame):
         return True, x, y
 
     def _calcTeleport(self, x, y):
-        pass
+        level = 2
+        mapInfo = self.gameInfo['map']['tiles']
+
+        v, x, y = self._calcTile(x, y, 'a')
+        v, x, y = self._calcTile(x, y, 'a')
+        if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
+            return x, y
         
+        for level in range(2, 28):
+            for _ in range(level):
+                v, x, y = self._calcTile(x, y, 'd')
+                if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
+                    return x, y
+            for _ in range(level):
+                v, x, y = self._calcTile(x, y, 'e')
+                if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
+                    return x, y
+            for _ in range(level):
+                v, x, y = self._calcTile(x, y, 'w')
+                if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
+                    return x, y
+            for _ in range(level):
+                v, x, y = self._calcTile(x, y, 'q')
+                if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
+                    return x, y
+            for _ in range(level):
+                v, x, y = self._calcTile(x, y, 'a')
+                if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
+                    return x, y
+            for _ in range(level - 1):
+                v, x, y = self._calcTile(x, y, 's')
+                if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
+                    return x, y
+
+            v, x, y = self._calcTile(x, y, 's')
+            v, x, y = self._calcTile(x, y, 'a')
+            if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
+                return x, y
+
+        # bad
+        return x, y
+                
 
     def possible_moves(self):
         currentPlayerInfo = None
@@ -150,7 +190,13 @@ class Game(easyAI.TwoPlayersGame):
             possibleMoves.append([2, None, None])
 
         # TP
-        if len(possibleMoves) == 0:
+        stuck = True
+        for move in possibleMoves:
+            if move[0] == 0:
+                stuck = False
+                break
+        if stuck:
+            possibleMoves.clear()
             possibleMoves.append([3, None, None])
 
         return possibleMoves
