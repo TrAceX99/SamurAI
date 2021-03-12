@@ -243,12 +243,12 @@ class Game(easyAI.TwoPlayersGame):
 
             move[3].append((currentPlayerInfo['x'], currentPlayerInfo['y']))
 
-
-            currentPlayerInfo['x'] = x
-            currentPlayerInfo['y'] = y
             if x is None or y is None:
                 move[3].append(None)
                 return 
+
+            currentPlayerInfo['x'] = x
+            currentPlayerInfo['y'] = y
             move[3].append(mapInfo[x][y]["tileContent"]['itemType'])
             mapInfo[x][y]["tileContent"]['itemType'] = "EMPTY"
             mapInfo[x][y]["tileContent"]["numOfItems"] = 0
