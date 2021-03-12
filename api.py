@@ -12,6 +12,7 @@ class Api:
 
     def _send(self, http):
         req = requests.get(self.httpString + http)
+        print(req.text, "AAAAAAAAAAAAAAAAAAa")
         response = json.loads(req.text)
         return response
 

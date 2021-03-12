@@ -170,7 +170,7 @@ class Game(easyAI.TwoPlayersGame):
             possibleMoves.append([1, None, None])
 
         #StealKoalas move
-        opponentx = opponentInfo["x"]
+        opponentx =  ["x"]
         opponenty = opponentInfo["y"]
 
         hammer = currentPlayerInfo["hasFreeASpot"]
