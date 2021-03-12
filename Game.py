@@ -421,7 +421,7 @@ class Game(easyAI.TwoPlayersGame):
                 value = 1500
             return value
         elif moveType == 3:
-            return -500
+            return -250 / (self.gameInfo['map']['numberOfFreeSpots'])
         elif moveType == 4:
             x, y = info[0], info[1]
             value = -1000
