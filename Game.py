@@ -364,6 +364,7 @@ class Game(easyAI.TwoPlayersGame):
         else:
             game = Game([easyAI.AI_Player(easyAI.AI.Negamax(depth)), easyAI.Human_Player()])
         game.gameInfo = gameInfo
+        game.playerMe = gameInfo["numOfMove"]
         return game
     
 
