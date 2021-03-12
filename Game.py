@@ -351,7 +351,7 @@ class Game(easyAI.TwoPlayersGame):
             else:
                 currentPlayerInfo = self.gameInfo['player1']
                 otherPlayerInfo = self.gameInfo["player2"]
-        return currentPlayerInfo['score'] - otherPlayerInfo['score']
+        return currentPlayerInfo['score'] + currentPlayerInfo['energy'] * 100 - otherPlayerInfo['score'] - otherPlayerInfo['energy'] * 100
 
     @staticmethod
     def quickSetup():
@@ -446,15 +446,18 @@ class Game(easyAI.TwoPlayersGame):
         if moveType == 0:
             
             if info == "ENERGY":
-                return 20
+                r = 15
             elif info == "KOALA":
-                return 50
+                r = 50
             elif info == "KOALA_CREW":
-                return 1400
+                r = 1500
             elif info == "FREE_A_SPOT":
-                return 600
+                r = 700
             elif info == "EMPTY":
-                return -100
+                r = -99
+            r += currentPlayerInfo["y"] / freeSpots
+            r += (25 - currentPlayerInfo["x"]) / freeSpots
+            return r
         elif moveType == 1:
             return 150
         elif moveType == 2:
@@ -474,7 +477,7 @@ class Game(easyAI.TwoPlayersGame):
                 value = 1500
             return value
         elif moveType == 3:
-            return -1500 / freeSpots
+            return (-1500 / freeSpots) - 5
         elif moveType == 4:
             x, y = info[0], info[1]
             value = -1000
@@ -484,5 +487,5 @@ class Game(easyAI.TwoPlayersGame):
                 value += 100
             return value
         elif moveType == 5:
-            return -0.15 * freeSpots
+            return (-0.3 * freeSpots) - 4
         return None

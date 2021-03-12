@@ -28,7 +28,7 @@ def main():
         print(move)
         print(moves)
         
-        #time.sleep(0.5)
+        # time.sleep(0.3)
         # rand = randrange(len(moves))
         game.gameInfo = api.doAction(move)
 
