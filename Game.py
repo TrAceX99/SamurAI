@@ -452,7 +452,7 @@ class Game(easyAI.TwoPlayersGame):
             elif info == "FREE_A_SPOT":
                 return 600
             elif info == "EMPTY":
-                return -100
+                return -80
         elif moveType == 1:
             return 150
         elif moveType == 2:
@@ -482,5 +482,5 @@ class Game(easyAI.TwoPlayersGame):
                 value += 100
             return value
         elif moveType == 5:
-            return -0.15 * freeSpots
+            return -0.3 * freeSpots
         return None
