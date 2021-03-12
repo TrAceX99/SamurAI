@@ -8,20 +8,18 @@ from Game import Game
 
 
 def main():
-    # if len(sys.argv) < 2:
-    #     print("Too few args")
-    #     return
+    if len(sys.argv) < 2:
+        print("Too few args")
+        return
 
     api = Api()
 
-    # if sys.argv[1] == "-t":
-    #     api.startGame()
-    # else:
-    #     gameid = int(sys.argv[1])
-    #     api.startGame(gameid)
-
-    game = Game.startGame(api.startGame(), depth=5)
-    print(api.gameid)
+    if sys.argv[1] == "-t":
+        game = Game.startGame(api.startGame(), depth=6)
+        print(api.gameid)
+    else:
+        gameid = int(sys.argv[1])
+        game = Game.startGame(api.startGame(gameid), depth=6)
 
     while game.gameInfo["finished"] == False:
         moves = game.possible_moves()
