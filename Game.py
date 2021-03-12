@@ -246,7 +246,9 @@ class Game(easyAI.TwoPlayersGame):
 
             currentPlayerInfo['x'] = x
             currentPlayerInfo['y'] = y
-            
+            if x is None or y is None:
+                move[3].append(None)
+                return 
             move[3].append(mapInfo[x][y]["tileContent"]['itemType'])
             mapInfo[x][y]["tileContent"]['itemType'] = "EMPTY"
             mapInfo[x][y]["tileContent"]["numOfItems"] = 0
@@ -320,7 +322,8 @@ class Game(easyAI.TwoPlayersGame):
         elif move[0] == 3:
             mapInfo = self.gameInfo['map']['tiles']
             itemType = move[3].pop()
-
+            if itemType is None:
+                return
             currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, "TELEPORT", move[0])
             mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
             mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
@@ -339,6 +342,8 @@ class Game(easyAI.TwoPlayersGame):
                 return 50
             elif info == "KOALA_CREW":
                 return 1400
+            elif info == "FREE_A_SPOT":
+                return 600
         elif moveType == 1:
             return 300
         elif moveType == 2:
@@ -351,4 +356,6 @@ class Game(easyAI.TwoPlayersGame):
             return value
         elif moveType == 3:
             return -500
+        elif moveType == 4:
+            return -1000
         return 100
