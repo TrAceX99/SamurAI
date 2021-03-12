@@ -30,7 +30,6 @@ def main():
         time.sleep(0.5)
         # rand = randrange(len(moves))
         game.gameInfo = api.doAction(move)
-        print(game.gameInfo)
 
     print(game.gameInfo["winnerTeamName"])
 

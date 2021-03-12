@@ -4,7 +4,7 @@ import json
 class Api:
     httpString = "https://aibg2021.herokuapp.com/"
     gameid = 0
-    playerid = 713016
+    playerid = 713017
     defaultargsString = ""
 
     def __init__(self):
@@ -12,7 +12,6 @@ class Api:
 
     def _send(self, http):
         req = requests.get(self.httpString + http)
-        print(req.text, "AAAAAAAAAAAAAAAAAAa")
         response = json.loads(req.text)
         return response
 
