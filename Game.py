@@ -322,6 +322,7 @@ class Game(easyAI.TwoPlayersGame):
         elif move[0] == 3:
             mapInfo = self.gameInfo['map']['tiles']
             itemType = move[3].pop()
+            print(itemType)
             if itemType is None:
                 return
             currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, "TELEPORT", move[0])
@@ -343,7 +344,9 @@ class Game(easyAI.TwoPlayersGame):
             elif info == "KOALA_CREW":
                 return 1400
             elif info == "FREE_A_SPOT":
-                return 600
+                return 999999
+            elif info == "EMPTY":
+                return -100
         elif moveType == 1:
             return 300
         elif moveType == 2:
