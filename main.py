@@ -8,9 +8,9 @@ from Game import Game
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Too few args")
-        return
+    # if len(sys.argv) < 2:
+    #     print("Too few args")
+    #     return
 
     api = Api()
 
