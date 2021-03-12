@@ -16,6 +16,7 @@ class Game(easyAI.TwoPlayersGame):
             's' : 'w',
             'd' : 'q'
             }
+        self.playerMe = 0
 
     def _calcTile(self, x, y, dir):
         if dir == 's':
