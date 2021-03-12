@@ -12,7 +12,9 @@ class Api:
 
     def _send(self, http):
         req = requests.get(self.httpString + http)
-        print(req.text, "AAAAAAAAAAAAAAAAAAa")
+        while req.status_code = 403:
+            print("WWWWWWWWWWWW")
+            req = requests.get(self.httpString + http)
         response = json.loads(req.text)
         return response
 
@@ -47,17 +49,19 @@ class Api:
 
     def doAction(self, move):
         if move[0] == 0:
-            return self.actionMove(move[1], move[2])
+            r = self.actionMove(move[1], move[2])
         elif move[0] == 1:
-            return self.actionSkipATurn()
+            r = self.actionSkipATurn()
         elif move[0] == 2:
-            return self.actionStealKoalas()
+            r = self.actionStealKoalas()
         # Moze biti opasno TODO
         elif move[0] == 3:
-            return self.actionMove('s', 1)
+            r = self.actionMove('s', 1)
         elif move[0] == 4:
-            return self.actionfreeASpot(move[1], move[2])
+            r = self.actionfreeASpot(move[1], move[2])
         elif move[0] == 5:
-            return self.actionMove(move[1], move[2])
+            r = self.actionMove(move[1], move[2])
         else:
             return 1
+        
+        return r
