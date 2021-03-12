@@ -280,11 +280,12 @@ class Game(easyAI.TwoPlayersGame):
             move.append([])
             for i in range(move[2]):
                 _, x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], move[1])
+                currentPlayerInfo['x'] = x
+                currentPlayerInfo['y'] = y
                 value = self.getMoveValue(currentPlayerInfo, mapInfo[x][y]["tileContent"]['itemType'], move[0])
 
 
-                currentPlayerInfo['x'] = x
-                currentPlayerInfo['y'] = y
+                
                 currentPlayerInfo['score'] += value
                 move[3].append(mapInfo[x][y]["tileContent"]['itemType'])
                 mapInfo[x][y]["tileContent"]['itemType'] = "EMPTY"
@@ -443,6 +444,7 @@ class Game(easyAI.TwoPlayersGame):
     def getMoveValue(self, currentPlayerInfo, info, moveType):
         freeSpots = self.gameInfo['map']['numberOfFreeSpots']
         if moveType == 0:
+            
             if info == "ENERGY":
                 return 20
             elif info == "KOALA":
