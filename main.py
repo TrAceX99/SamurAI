@@ -23,7 +23,7 @@ def main():
     game = Game.startGame(api.startGame())
     print(api.gameid)
 
-    while True:
+    while game.gameInfo["finished"] == False:
         moves = game.possible_moves()
         move = game.get_move()
         print(move)
