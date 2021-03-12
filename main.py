@@ -27,9 +27,11 @@ def main():
         move = game.get_move()
         print(move)
         print(moves)
+        
         time.sleep(0.5)
         # rand = randrange(len(moves))
         game.gameInfo = api.doAction(move)
+        print(game.gameInfo['map']['numberOfFreeSpots'])
 
     print(game.gameInfo["winnerTeamName"])
 
