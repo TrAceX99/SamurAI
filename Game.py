@@ -446,18 +446,18 @@ class Game(easyAI.TwoPlayersGame):
         if moveType == 0:
             
             if info == "ENERGY":
-                r = 20
-            elif info == "KOALA":
                 r = 50
+            elif info == "KOALA":
+                r = 75
             elif info == "KOALA_CREW":
-                r = 1500
+                r = 10500
             elif info == "FREE_A_SPOT":
-                r = 700
+                r = 500
             elif info == "EMPTY":
-                r = -80
+                r = -50
             return r
         elif moveType == 1:
-            return 150
+            return 200
         elif moveType == 2:
             otherPlayerInfo = None
             if self.playerMe == 0:
@@ -471,11 +471,11 @@ class Game(easyAI.TwoPlayersGame):
                 else:
                     otherPlayerInfo = self.gameInfo["player2"]
             value = otherPlayerInfo['gatheredKoalas'] * 150
-            if value > 1500:
-                value = 1500
+            if value > 1700:
+                value = 1700
             return value
         elif moveType == 3:
-            return -1500 / freeSpots
+            return (-1700 / freeSpots)
         elif moveType == 4:
             x, y = info[0], info[1]
             value = -1000
@@ -485,5 +485,5 @@ class Game(easyAI.TwoPlayersGame):
                 value += 100
             return value
         elif moveType == 5:
-            return -0.3 * freeSpots
+            return -0.1 * freeSpots
         return None
