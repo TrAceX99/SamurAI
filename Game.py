@@ -431,5 +431,5 @@ class Game(easyAI.TwoPlayersGame):
                 value += 100
             return value
         elif moveType == 5:
-            return 0
-        return 100
+            return -5
+        return None

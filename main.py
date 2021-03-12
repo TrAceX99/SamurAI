@@ -20,7 +20,7 @@ def main():
     #     gameid = int(sys.argv[1])
     #     api.startGame(gameid)
 
-    game = Game.startGame(api.startGame())
+    game = Game.startGame(api.startGame(), depth=5)
     print(api.gameid)
 
     while game.gameInfo["finished"] == False:
@@ -28,7 +28,7 @@ def main():
         move = game.get_move()
         print(move)
         print(moves)
-        # time.sleep(0.5)
+        time.sleep(0.5)
         # rand = randrange(len(moves))
         game.gameInfo = api.doAction(move)
 
