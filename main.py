@@ -20,7 +20,7 @@ def main():
     else:
         gameid = int(sys.argv[1])
         game = Game.startGame(api.startGame(gameid), depth=6)
-        print(game.gameInfo)
+        print(game.gameInfo["numOfMove"])
 
     while game.gameInfo["finished"] == False:
         moves = game.possible_moves()
