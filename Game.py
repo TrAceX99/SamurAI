@@ -252,6 +252,16 @@ class Game(easyAI.TwoPlayersGame):
             mapInfo[x][y]["tileContent"]['itemType'] = "EMPTY"
             mapInfo[x][y]["tileContent"]["numOfItems"] = 0
             mapInfo[x][y]['ownedByTeam'] = currentPlayerInfo['teamName']
+        elif move[0] == 4:
+            move.append([])
+            x, y = move[1], move[2]
+            value = self.getMoveValue(currentPlayerInfo, (x, y), move[0])
+            currentPlayerInfo['score'] += value
+            move[3] = mapInfo[x][y]['ownedByTeam']
+            mapInfo[x][y]['ownedByTeam'] = ""
+        elif move[0] == 5:
+            value = self.getMoveValue(currentPlayerInfo, "HEADBANG", move[0])
+            currentPlayerInfo['score'] += value
         return
 
     def is_over(self):
@@ -331,6 +341,14 @@ class Game(easyAI.TwoPlayersGame):
             x, y = move[3].pop()
             currentPlayerInfo['x'] = x
             currentPlayerInfo['y'] = y
+        elif move[0] == 4:
+            mapInfo = self.gameInfo['map']['tiles']
+            x, y = move[1], move[2]
+            mapInfo[x][y]['ownedByTeam'] = move[3]
+            currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, (x, y), move[0])
+        elif move[0] == 5:
+            value = self.getMoveValue(currentPlayerInfo, "HEADBANG", move[0])
+            currentPlayerInfo['score'] -= value
         pass
 
 
@@ -343,11 +361,11 @@ class Game(easyAI.TwoPlayersGame):
             elif info == "KOALA_CREW":
                 return 1400
             elif info == "FREE_A_SPOT":
-                return 999999
+                return 600
             elif info == "EMPTY":
-                return 0
+                return -20
         elif moveType == 1:
-            return 300
+            return 50
         elif moveType == 2:
             otherPlayerInfo = None
             if self.player == self.players[0]:
@@ -361,5 +379,13 @@ class Game(easyAI.TwoPlayersGame):
         elif moveType == 3:
             return -500
         elif moveType == 4:
-            return -1000
+            x, y = info[0], info[1]
+            value = -1000
+            if self.gameInfo['map']['tiles'][x][y]['ownedByTeam'] == currentPlayerInfo['teamName']:
+                value += -100
+            else:
+                value += 100
+            return value
+        elif moveType == 5:
+            return 0
         return 100
