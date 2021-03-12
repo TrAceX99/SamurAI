@@ -53,3 +53,9 @@ class Api:
         # Moze biti opasno TODO
         elif move[0] == 3:
             return self.actionMove('s', 1)
+        elif move[0] == 4:
+            return self.actionfreeASpot(move[1], move[2])
+        elif move[0] == 5:
+            return self.actionMove(move[1], move[2])
+        else:
+            return 1
