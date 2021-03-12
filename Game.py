@@ -170,7 +170,7 @@ class Game(easyAI.TwoPlayersGame):
             possibleMoves.append([1, None, None])
 
         #StealKoalas move
-        opponentx = opponentInfo["x"]
+        opponentx =  ["x"]
         opponenty = opponentInfo["y"]
 
         hammer = currentPlayerInfo["hasFreeASpot"]
@@ -408,7 +408,7 @@ class Game(easyAI.TwoPlayersGame):
         freeSpots = self.gameInfo['map']['numberOfFreeSpots']
         if moveType == 0:
             if info == "ENERGY":
-                return 10
+                return 15
             elif info == "KOALA":
                 return 50
             elif info == "KOALA_CREW":
@@ -416,9 +416,9 @@ class Game(easyAI.TwoPlayersGame):
             elif info == "FREE_A_SPOT":
                 return 600
             elif info == "EMPTY":
-                return -100
+                return -50
         elif moveType == 1:
-            return 300
+            return 200
         elif moveType == 2:
             otherPlayerInfo = None
             if self.playerMe == 0:
@@ -430,7 +430,7 @@ class Game(easyAI.TwoPlayersGame):
                 value = 1500
             return value
         elif moveType == 3:
-            return -500 / freeSpots
+            return -600 / freeSpots
         elif moveType == 4:
             x, y = info[0], info[1]
             value = -1000
