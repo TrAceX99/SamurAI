@@ -213,7 +213,6 @@ class Game(easyAI.TwoPlayersGame):
             otherPlayerInfo = self.gameInfo['player1']
         mapInfo = self.gameInfo['map']['tiles']
 
-        
         if move[0] == 0:
             move.append([])
             for i in range(move[2]):
@@ -301,7 +300,8 @@ class Game(easyAI.TwoPlayersGame):
 
                 currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType, move[0])
                 mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
-                mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
+                mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['tileContent']['itemType'] = itemType
+                mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['tileContent']['numOfItems'] = 1
                 #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
             
                 _, x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], direction)
@@ -322,12 +322,11 @@ class Game(easyAI.TwoPlayersGame):
         elif move[0] == 3:
             mapInfo = self.gameInfo['map']['tiles']
             itemType = move[3].pop()
-            print(itemType)
             if itemType is None:
                 return
             currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, "TELEPORT", move[0])
             mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
-            mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
+            mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['tileContent']['itemType'] = itemType
             #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
             x, y = move[3].pop()
             currentPlayerInfo['x'] = x
@@ -338,7 +337,7 @@ class Game(easyAI.TwoPlayersGame):
     def getMoveValue(self, currentPlayerInfo, info, moveType):
         if moveType == 0:
             if info == "ENERGY":
-                return 0
+                return 10
             elif info == "KOALA":
                 return 50
             elif info == "KOALA_CREW":
@@ -346,7 +345,7 @@ class Game(easyAI.TwoPlayersGame):
             elif info == "FREE_A_SPOT":
                 return 999999
             elif info == "EMPTY":
-                return -100
+                return 0
         elif moveType == 1:
             return 300
         elif moveType == 2:
@@ -356,6 +355,8 @@ class Game(easyAI.TwoPlayersGame):
             else:
                 otherPlayerInfo = self.gameInfo['player1']
             value = otherPlayerInfo['gatheredKoalas'] * 150
+            if value > 1500:
+                value = 1500
             return value
         elif moveType == 3:
             return -500
