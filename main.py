@@ -20,7 +20,7 @@ def main():
     #     gameid = int(sys.argv[1])
     #     api.startGame(gameid)
 
-    game = Game.startGame(api.startGame(), depth=5)
+    game = Game.startGame(api.startGame(), depth=6)
     print(api.gameid)
 
     while game.gameInfo["finished"] == False:
