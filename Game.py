@@ -302,6 +302,7 @@ class Game(easyAI.TwoPlayersGame):
                 currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType, move[0])
                 mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
                 mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
+                mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]["tileContent"]["numOfItems"] = 1
                 #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
             
                 _, x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], direction)
