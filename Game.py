@@ -351,7 +351,7 @@ class Game(easyAI.TwoPlayersGame):
             else:
                 currentPlayerInfo = self.gameInfo['player1']
                 otherPlayerInfo = self.gameInfo["player2"]
-        return currentPlayerInfo['score'] + currentPlayerInfo['energy'] * 100 - otherPlayerInfo['score'] - otherPlayerInfo['energy'] * 100
+        return currentPlayerInfo['score'] - otherPlayerInfo['score']
 
     @staticmethod
     def quickSetup():
@@ -459,7 +459,6 @@ class Game(easyAI.TwoPlayersGame):
             y = currentPlayerInfo["y"]
             r += y / freeSpots
             r += (26 - x) / freeSpots
-            for i in 
             return r
         elif moveType == 1:
             return 150
