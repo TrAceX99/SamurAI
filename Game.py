@@ -173,7 +173,7 @@ class Game(easyAI.TwoPlayersGame):
         hammer = currentPlayerInfo["hasFreeASpot"]
         headbang = False
 
-        _, x, y = self._calcTile(playerx, playery, 'a')
+        valid, x, y = self._calcTile(playerx, playery, 'a')
         if x == opponentx and y == opponenty:
             possibleMoves.append([2, None, None])
         if not headbang and (not valid or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE"):
@@ -183,7 +183,7 @@ class Game(easyAI.TwoPlayersGame):
             if mapInfo[x][y]["ownedByTeam"] != "":
                 possibleMoves.append([4, x, y])
 
-        _, x, y = self._calcTile(playerx, playery, 's')
+        valid, x, y = self._calcTile(playerx, playery, 's')
         if x == opponentx and y == opponenty:
             possibleMoves.append([2, None, None])
         if not headbang and (not valid or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE"):
@@ -193,7 +193,7 @@ class Game(easyAI.TwoPlayersGame):
             if mapInfo[x][y]["ownedByTeam"] != "":
                 possibleMoves.append([4, x, y])
 
-        _, x, y = self._calcTile(playerx, playery, 'd')
+        valid, x, y = self._calcTile(playerx, playery, 'd')
         if x == opponentx and y == opponenty:
             possibleMoves.append([2, None, None])
         if not headbang and (not valid or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE"):
@@ -203,7 +203,7 @@ class Game(easyAI.TwoPlayersGame):
             if mapInfo[x][y]["ownedByTeam"] != "":
                 possibleMoves.append([4, x, y])
 
-        _, x, y = self._calcTile(playerx, playery, 'e')
+        valid, x, y = self._calcTile(playerx, playery, 'e')
         if x == opponentx and y == opponenty:
             possibleMoves.append([2, None, None])
         if not headbang and (not valid or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE"):
@@ -213,7 +213,7 @@ class Game(easyAI.TwoPlayersGame):
             if mapInfo[x][y]["ownedByTeam"] != "":
                 possibleMoves.append([4, x, y])
 
-        _, x, y = self._calcTile(playerx, playery, 'w')
+        valid, x, y = self._calcTile(playerx, playery, 'w')
         if x == opponentx and y == opponenty:
             possibleMoves.append([2, None, None])
         if not headbang and (not valid or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE"):
@@ -223,7 +223,7 @@ class Game(easyAI.TwoPlayersGame):
             if mapInfo[x][y]["ownedByTeam"] != "":
                 possibleMoves.append([4, x, y])
 
-        _, x, y = self._calcTile(playerx, playery, 'q')
+        valid, x, y = self._calcTile(playerx, playery, 'q')
         if x == opponentx and y == opponenty:
             possibleMoves.append([2, None, None])
         if not headbang and (not valid or mapInfo[x][y]["ownedByTeam"] != "" or mapInfo[x][y]["tileContent"]["itemType"] == "HOLE"):
