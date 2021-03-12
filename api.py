@@ -27,6 +27,9 @@ class Api:
         self.defaultargsString += "playerId=" + str(self.playerid) + "&gameId=" + str(self.gameid)
         return gamedata
 
+    def startVsGame(self):
+        return _send("botVSbot?player1Id=713016&player2Id=713017")
+
     def actionSkipATurn(self):
         r = self._send("skipATurn?" + self.defaultargsString)
         return r
