@@ -157,29 +157,54 @@ class Game(easyAI.TwoPlayersGame):
 
     def make_move(self, move):
 
-
+        otherPlayerInfo = None
         currentPlayerInfo = None
         if self.player == self.players[0]:
             currentPlayerInfo = self.gameInfo['player1']
+            otherPlayerInfo = self.gameInfo['player2']
         else:
             currentPlayerInfo = self.gameInfo['player2']
+            otherPlayerInfo = self.gameInfo['player1']
         mapInfo = self.gameInfo['map']['tiles']
 
-        move.append([])
+        
         if move[0] == 0:
+            move.append([])
             for i in range(move[2]):
                 _, x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], move[1])
+                value = self.getMoveValue(currentPlayerInfo, mapInfo[x][y]["tileContent"]['itemType'], move[0])
+
                 currentPlayerInfo['x'] = x
                 currentPlayerInfo['y'] = y
-                value = self.getMoveValue(currentPlayerInfo, mapInfo[x][y]["tileContent"]['itemType'])
                 currentPlayerInfo['score'] += value
                 move[3].append(mapInfo[x][y]["tileContent"]['itemType'])
                 mapInfo[x][y]["tileContent"]['itemType'] = "EMPTY"
                 mapInfo[x][y]["tileContent"]["numOfItems"] = 0
             mapInfo[x][y]['ownedByTeam'] = currentPlayerInfo['teamName']
-        elif move[0] == 3:
-            value = self.getMoveValue(currentPlayerInfo, "TELEPORT")
+        elif move[0] == 1:
+            value = self.getMoveValue(currentPlayerInfo, "SKIP", move[0])
             currentPlayerInfo['score'] += value
+        elif move[0] == 2:
+            value = self.getMoveValue(currentPlayerInfo, "STEAL", move[0])
+            currentPlayerInfo['score'] += value
+            otherPlayerInfo['score'] -= value
+        elif move[0] == 3:
+            move.append([])
+            value = self.getMoveValue(currentPlayerInfo, "TELEPORT", move[0])
+            currentPlayerInfo['score'] += value
+            x, y = self._calcTeleport(currentPlayerInfo['x'], currentPlayerInfo['y'])
+
+
+            move[3].append((currentPlayerInfo['x'], currentPlayerInfo['y']))
+
+
+            currentPlayerInfo['x'] = x
+            currentPlayerInfo['y'] = y
+            
+            move[3].append(mapInfo[x][y]["tileContent"]['itemType'])
+            mapInfo[x][y]["tileContent"]['itemType'] = "EMPTY"
+            mapInfo[x][y]["tileContent"]["numOfItems"] = 0
+            mapInfo[x][y]['ownedByTeam'] = currentPlayerInfo['teamName']
         return
 
     def is_over(self):
@@ -213,21 +238,20 @@ class Game(easyAI.TwoPlayersGame):
     
 
     def unmake_move(self, move):
+        currentPlayerInfo = None
+        if self.player == self.players[0]:
+            currentPlayerInfo = self.gameInfo['player1']
+        else:
+            currentPlayerInfo = self.gameInfo['player2']
 
         if move[0] == 0:
             direction = self.FINITE_STATE_MACHINE[move[1]]
             mapInfo = self.gameInfo['map']['tiles']
 
-            currentPlayerInfo = None
-            if self.player == self.players[0]:
-                currentPlayerInfo = self.gameInfo['player1']
-            else:
-                currentPlayerInfo = self.gameInfo['player2']
-
             for i in range(move[2]):
                 itemType = move[3].pop()
 
-                currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType)
+                currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, itemType, move[0])
                 mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
                 mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
                 #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
@@ -235,9 +259,50 @@ class Game(easyAI.TwoPlayersGame):
                 _, x, y = self._calcTile(currentPlayerInfo['x'], currentPlayerInfo['y'], direction)
                 currentPlayerInfo['x'] = x
                 currentPlayerInfo['y'] = y
+        elif move[0] == 1:
+            value = self.getMoveValue(currentPlayerInfo, "SKIP", move[0])
+            currentPlayerInfo['score'] -= value
+        elif move[0] == 2:
+            otherPlayerInfo = None
+            if self.player == self.players[0]:
+                otherPlayerInfo = self.gameInfo['player2']
+            else:
+                otherPlayerInfo = self.gameInfo['player1']
+            value = self.getMoveValue(currentPlayerInfo, "STEAL", move[0])
+            currentPlayerInfo['score'] -= value
+            otherPlayerInfo['score'] += value
+        elif move[0] == 3:
+            mapInfo = self.gameInfo['map']['tiles']
+            itemType = move[3].pop()
 
+            currentPlayerInfo['score'] -= self.getMoveValue(currentPlayerInfo, "TELEPORT", move[0])
+            mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['ownedByTeam'] = ""
+            mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]['itemType'] = itemType
+            #mapInfo[currentPlayerInfo['x']][currentPlayerInfo['y']]
+            x, y = move[3].pop()
+            currentPlayerInfo['x'] = x
+            currentPlayerInfo['y'] = y
         pass
 
 
-    def getMoveValue(self, currentPlayerInfo, itemType):
+    def getMoveValue(self, currentPlayerInfo, info, moveType):
+        if moveType == 0:
+            if info == "ENERGY":
+                return 0
+            elif info == "KOALA":
+                return 50
+            elif info == "KOALA_CREW":
+                return 1400
+        elif moveType == 1:
+            return 300
+        elif moveType == 2:
+            otherPlayerInfo = None
+            if self.player == self.players[0]:
+                otherPlayerInfo = self.gameInfo['player2']
+            else:
+                otherPlayerInfo = self.gameInfo['player1']
+            value = otherPlayerInfo['gatheredKoalas'] * 150
+            return value
+        elif moveType == 3:
+            return -500
         return 100
