@@ -32,10 +32,5 @@ def main():
         game.gameInfo = api.doAction(move)
 
 
-    
-    
-
-    
-
 if __name__ == "__main__":
     main()
