@@ -19,7 +19,7 @@ def main():
         print(api.gameid)
     else:
         gameid = int(sys.argv[1])
-        game = Game.startGame(api.startGame(gameid), depth=5)
+        game = Game.startGame(api.startGame(gameid), depth=6)
         print(game.gameInfo["numOfMove"])
 
     while game.gameInfo["finished"] == False:
@@ -28,7 +28,7 @@ def main():
         print(move)
         print(moves)
         
-        time.sleep(0.5)
+        #time.sleep(0.5)
         # rand = randrange(len(moves))
         game.gameInfo = api.doAction(move)
         print(game.gameInfo['map']['numberOfFreeSpots'])
