@@ -22,7 +22,6 @@ def main():
         game = Game.startGame(api.startGame(gameid), depth=6)
 
     while game.gameInfo["finished"] == False:
-        moves = game.possible_moves()
         move = game.get_move()
         print(move)
         # time.sleep(0.3)
