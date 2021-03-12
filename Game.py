@@ -263,17 +263,17 @@ class Game(easyAI.TwoPlayersGame):
         if self.playerMe == 0:
             if self.player == self.players[0]:
                 currentPlayerInfo = self.gameInfo['player1']
-                opponentInfo = self.gameInfo["player2"]
+                otherPlayerInfo = self.gameInfo["player2"]
             else:
                 currentPlayerInfo = self.gameInfo['player2']
-                opponentInfo = self.gameInfo["player1"]
+                otherPlayerInfo = self.gameInfo["player1"]
         else:
             if self.player == self.players[0]:
                 currentPlayerInfo = self.gameInfo['player2']
-                opponentInfo = self.gameInfo["player1"]
+                otherPlayerInfo = self.gameInfo["player1"]
             else:
                 currentPlayerInfo = self.gameInfo['player1']
-                opponentInfo = self.gameInfo["player2"]
+                otherPlayerInfo = self.gameInfo["player2"]
         mapInfo = self.gameInfo['map']['tiles']
 
         if move[0] == 0:
@@ -339,17 +339,17 @@ class Game(easyAI.TwoPlayersGame):
         if self.playerMe == 0:
             if self.player == self.players[0]:
                 currentPlayerInfo = self.gameInfo['player1']
-                opponentInfo = self.gameInfo["player2"]
+                otherPlayerInfo = self.gameInfo["player2"]
             else:
                 currentPlayerInfo = self.gameInfo['player2']
-                opponentInfo = self.gameInfo["player1"]
+                otherPlayerInfo = self.gameInfo["player1"]
         else:
             if self.player == self.players[0]:
                 currentPlayerInfo = self.gameInfo['player2']
-                opponentInfo = self.gameInfo["player1"]
+                otherPlayerInfo = self.gameInfo["player1"]
             else:
                 currentPlayerInfo = self.gameInfo['player1']
-                opponentInfo = self.gameInfo["player2"]
+                otherPlayerInfo = self.gameInfo["player2"]
         return currentPlayerInfo['score'] - otherPlayerInfo['score']
 
     @staticmethod
