@@ -54,7 +54,7 @@ class Game(easyAI.TwoPlayersGame):
         if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
             return x, y
         
-        for level in range(2, 28):
+        for level in range(2, 30):
             for _ in range(level):
                 v, x, y = self._calcTile(x, y, 'd')
                 if v and mapInfo[x][y]["ownedByTeam"] == "" and mapInfo[x][y]["tileContent"]["itemType"] != "HOLE":
@@ -86,7 +86,7 @@ class Game(easyAI.TwoPlayersGame):
                 return x, y
 
         # bad
-        return x, y
+        return None, None
                 
 
     def possible_moves(self):
