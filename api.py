@@ -12,7 +12,7 @@ class Api:
 
     def _send(self, http):
         req = requests.get(self.httpString + http)
-        while req.status_code = 403:
+        while req.status_code == 403:
             print("WWWWWWWWWWWW")
             req = requests.get(self.httpString + http)
         response = json.loads(req.text)
