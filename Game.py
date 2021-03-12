@@ -369,10 +369,16 @@ class Game(easyAI.TwoPlayersGame):
 
     def unmake_move(self, move):
         currentPlayerInfo = None
-        if self.player == self.players[0]:
-            currentPlayerInfo = self.gameInfo['player1']
+        if self.playerMe == 0:
+            if self.player == self.players[0]:
+                currentPlayerInfo = self.gameInfo['player1']
+            else:
+                currentPlayerInfo = self.gameInfo['player2']
         else:
-            currentPlayerInfo = self.gameInfo['player2']
+            if self.player == self.players[0]:
+                currentPlayerInfo = self.gameInfo['player2']
+            else:
+                currentPlayerInfo = self.gameInfo['player1']
 
         if move[0] == 0:
             direction = self.FINITE_STATE_MACHINE[move[1]]
@@ -397,10 +403,16 @@ class Game(easyAI.TwoPlayersGame):
             currentPlayerInfo['score'] -= value
         elif move[0] == 2:
             otherPlayerInfo = None
-            if self.player == self.players[0]:
-                otherPlayerInfo = self.gameInfo['player2']
+            if self.playerMe == 0:
+                if self.player == self.players[0]:
+                    otherPlayerInfo = self.gameInfo["player2"]
+                else:
+                    otherPlayerInfo = self.gameInfo["player1"]
             else:
-                otherPlayerInfo = self.gameInfo['player1']
+                if self.player == self.players[0]:
+                    otherPlayerInfo = self.gameInfo["player1"]
+                else:
+                    otherPlayerInfo = self.gameInfo["player2"]
             value = self.getMoveValue(currentPlayerInfo, "STEAL", move[0])
             currentPlayerInfo['score'] -= value
             otherPlayerInfo['score'] += value
@@ -444,10 +456,16 @@ class Game(easyAI.TwoPlayersGame):
             return 200
         elif moveType == 2:
             otherPlayerInfo = None
-            if self.player == self.players[0]:
-                otherPlayerInfo = self.gameInfo['player2']
+            if self.playerMe == 0:
+                if self.player == self.players[0]:
+                    otherPlayerInfo = self.gameInfo["player2"]
+                else:
+                    otherPlayerInfo = self.gameInfo["player1"]
             else:
-                otherPlayerInfo = self.gameInfo['player1']
+                if self.player == self.players[0]:
+                    otherPlayerInfo = self.gameInfo["player1"]
+                else:
+                    otherPlayerInfo = self.gameInfo["player2"]
             value = otherPlayerInfo['gatheredKoalas'] * 150
             if value > 1500:
                 value = 1500
