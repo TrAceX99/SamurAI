@@ -7,6 +7,7 @@ class Game(easyAI.TwoPlayersGame):
     def __init__(self, players) -> None:
         self.players = players 
         self.nplayer = 1 # koji igrac igra, 1 ili 2
+        self.playerMe = 0
         self.gameInfo = None
         self.FINITE_STATE_MACHINE = {
             'q' : 'd',
@@ -94,7 +95,7 @@ class Game(easyAI.TwoPlayersGame):
     def possible_moves(self):
         currentPlayerInfo = None
         opponentInfo = None
-        if self.player == self.players[0]:
+        if self.playerMe == 0:
             currentPlayerInfo = self.gameInfo['player1']
             opponentInfo = self.gameInfo["player2"]
         else:
@@ -251,7 +252,7 @@ class Game(easyAI.TwoPlayersGame):
 
         otherPlayerInfo = None
         currentPlayerInfo = None
-        if self.player == self.players[0]:
+        if self.playerMe == 0:
             currentPlayerInfo = self.gameInfo['player1']
             otherPlayerInfo = self.gameInfo['player2']
         else:
@@ -319,7 +320,7 @@ class Game(easyAI.TwoPlayersGame):
     def scoring(self):
         currentPlayerInfo = None
         otherPlayerInfo = None
-        if self.player == self.players[0]:
+        if self.playerMe == 0:
             currentPlayerInfo = self.gameInfo['player1']
             otherPlayerInfo = self.gameInfo['player2']
         else:
@@ -339,12 +340,13 @@ class Game(easyAI.TwoPlayersGame):
         else:
             game = Game([easyAI.AI_Player(easyAI.AI.Negamax(depth)), easyAI.Human_Player()])
         game.gameInfo = gameInfo
+        game.playerMe = gameInfo["numOfMove"]
         return game
     
 
     def unmake_move(self, move):
         currentPlayerInfo = None
-        if self.player == self.players[0]:
+        if self.playerMe == 0:
             currentPlayerInfo = self.gameInfo['player1']
         else:
             currentPlayerInfo = self.gameInfo['player2']
@@ -372,7 +374,7 @@ class Game(easyAI.TwoPlayersGame):
             currentPlayerInfo['score'] -= value
         elif move[0] == 2:
             otherPlayerInfo = None
-            if self.player == self.players[0]:
+            if self.playerMe == 0:
                 otherPlayerInfo = self.gameInfo['player2']
             else:
                 otherPlayerInfo = self.gameInfo['player1']
@@ -419,7 +421,7 @@ class Game(easyAI.TwoPlayersGame):
             return 200
         elif moveType == 2:
             otherPlayerInfo = None
-            if self.player == self.players[0]:
+            if self.playerMe == 0:
                 otherPlayerInfo = self.gameInfo['player2']
             else:
                 otherPlayerInfo = self.gameInfo['player1']
