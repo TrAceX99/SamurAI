@@ -453,8 +453,11 @@ class Game(easyAI.TwoPlayersGame):
                 r = 700
             elif info == "EMPTY":
                 r = -99
-            r += currentPlayerInfo["y"] / freeSpots
-            r += (25 - currentPlayerInfo["x"]) / freeSpots
+            x = currentPlayerInfo["x"]
+            y = currentPlayerInfo["y"]
+            r += y / freeSpots
+            r += (26 - x) / freeSpots
+            for i in 
             return r
         elif moveType == 1:
             return 150
